@@ -1,0 +1,12 @@
+language: c
+
+compiler:
+    - gcc
+
+services:
+    - redis-server
+
+install:
+    - sudo apt-get install python-pip
+
+script: sudo make test
