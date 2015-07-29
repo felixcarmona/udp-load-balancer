@@ -3,7 +3,7 @@
 
 build:
 	make clean
-	gcc src/argparse.c src/socket.c src/udp_load_balancer.c -o build/udp_load_balancer
+	gcc src/hostname_resolver.c src/argparse.c src/socket.c src/udp_load_balancer.c -o build/udp_load_balancer
 
 install:
 	make build
