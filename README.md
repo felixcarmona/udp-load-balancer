@@ -17,6 +17,8 @@ Usage
           -h, --help            show this help message and exit
           -p, --port PORT
                                 Port to listen UDP messages (min 1, max 65535)
+          --host HOST or IP
+                                Bind the following Host or IP address to listen UDP messages (default: localhost)
           -s, --servers SERVERS
                                 Servers list to balance the UDP messages
                                 Example: "127.0.0.1:8123, 127.0.0.1:8124"

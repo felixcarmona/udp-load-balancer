@@ -6,7 +6,6 @@ from time import sleep
 import subprocess
 import os
 import signal
-from socket import gethostbyname
 
 
 class UdpLoadBalancerTestCase(unittest.TestCase):
