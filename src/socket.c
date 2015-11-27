@@ -18,9 +18,9 @@ struct sockaddr_in get_server_address(char *ip, int port)
     return server_address;
 }
 
-int create_socket(unsigned int port) {
+int create_socket(char *ip, unsigned int port) {
     int socket_ = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-    struct sockaddr_in udp_load_balancer_address = get_server_address(NULL, port);
+    struct sockaddr_in udp_load_balancer_address = get_server_address(ip, port);
 
     bind(
         socket_,

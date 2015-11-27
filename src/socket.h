@@ -3,7 +3,7 @@
 
 struct sockaddr_in get_server_address(char *ip, int port);
 
-int create_socket(unsigned int port);
+int create_socket(char *ip, unsigned int port);
 
 void listen_udp_packet(
     char message[MAX_PAYLOAD_LENGTH],

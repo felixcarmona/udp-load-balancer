@@ -56,6 +56,8 @@ void show_help() {
         "      -h, --help            show this help message and exit\n"
         "      -p, --port PORT\n"
         "                            Port to listen UDP messages (min 1, max 65535)\n"
+        "      --host HOST or IP\n"
+        "                            Bind the following Host or IP address to listen UDP messages (default: localhost)\n"
         "      -s, --servers SERVERS\n"
         "                            Servers list to balance the UDP messages\n"
         "                            Example: \"127.0.0.1:8123, localhost:8124, example.com:8123\"\n"
@@ -78,9 +80,15 @@ int main(int argc, char **argv)
     }
 
     unsigned int servers_amount = get_servers_amount(servers_list);
-    printf("Listening on port: %d\n", udp_load_balancer_port);
+    char *udp_load_balancer_ip = get_udp_load_balancer_host(argc, argv);
 
-    printf("Balancing to servers:\n");
+    printf("Listening on %s:%d", udp_load_balancer_ip, udp_load_balancer_port);
+    if(is_ip(udp_load_balancer_ip) == 0) {
+        udp_load_balancer_ip = get_ip_from_hostname(udp_load_balancer_ip);
+        printf(" (%s:%d)", udp_load_balancer_ip, udp_load_balancer_port);
+    }
+
+    printf("\n\nBalancing to servers:\n");
     char **servers_hosts = get_servers_hosts(servers_list, servers_amount);
     int *servers_ports = get_servers_ports(servers_list, servers_amount);
     unsigned int i;
@@ -92,7 +100,7 @@ int main(int argc, char **argv)
         printf("\n");
     }
 
-    int socket_ = create_socket(udp_load_balancer_port);
+    int socket_ = create_socket(udp_load_balancer_ip, udp_load_balancer_port);
 
     run_dispatcher(servers_list, socket_);
 

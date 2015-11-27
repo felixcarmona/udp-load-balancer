@@ -38,6 +38,22 @@ unsigned int get_udp_load_balancer_port(int argc, char **argv) {
     return 0;
 }
 
+char *get_udp_load_balancer_host(int argc, char **argv) {
+    char *host;
+
+    unsigned int i;
+    for (i = 0; i < argc; ++i)
+    {
+        if(strcmp(argv[i], "--host") == 0) {
+            host = argv[i+1];
+
+            return host;
+        }
+    }
+
+    return "localhost";
+}
+
 char **get_servers_list(int argc, char **argv) {
     char **servers_list = NULL;
     char *servers_list_raw = NULL;
